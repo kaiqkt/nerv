@@ -1,5 +1,6 @@
 package com.kaiqkt.nerv.application.config
 
+import com.kaiqkt.nerv.utils.Constants
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.MDC
@@ -16,7 +17,7 @@ class WebInterceptor : HandlerInterceptor {
     ): Boolean {
         val requestId: String = request.getHeader("X-Request-Id") ?: UUID.randomUUID().toString()
 
-        MDC.put("request_id", requestId)
+        MDC.put(Constants.Parameters.REQUEST_ID, requestId)
 
         return true
     }

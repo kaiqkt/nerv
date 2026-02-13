@@ -18,28 +18,23 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 class ErrorHandler : ResponseEntityExceptionHandler() {
-    companion object {
-        private const val INVALID_REQUEST = "INVALID_REQUEST"
-        private const val INVALID_REQUEST_MESSAGE = "Invalid request"
-    }
-
     @ExceptionHandler(DomainException::class)
     fun handleDomainException(ex: DomainException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse(ex.type.name, ex.message, mapOf())
+        val error = ErrorResponse(ex.message ?: "error", mapOf())
 
         return ResponseEntity(error, getStatusCode(ex.type))
     }
 
     @ExceptionHandler(MissingRequestHeaderException::class)
     fun handleMissingRequestHeaderException(ex: MissingRequestHeaderException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse(INVALID_REQUEST, INVALID_REQUEST_MESSAGE, mapOf(ex.headerName to "required header"))
+        val error = ErrorResponse("Missing header", mapOf(ex.headerName to "required header"))
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
 
     @ExceptionHandler(InvalidRequestException::class)
     fun handleInvalidRequestException(ex: InvalidRequestException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse(INVALID_REQUEST, INVALID_REQUEST_MESSAGE, ex.errors)
+        val error = ErrorResponse("Invalid request", ex.errors)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
@@ -52,7 +47,7 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
     ): ResponseEntity<Any> {
         val details = ex.bindingResult.fieldErrors.associate { it.field to (it.defaultMessage ?: "invalid") }
 
-        val error = ErrorResponse(INVALID_REQUEST, INVALID_REQUEST_MESSAGE, details)
+        val error = ErrorResponse("Invalid method arguments", details)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
@@ -65,7 +60,7 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
                 path to v.message
             }
 
-        val error = ErrorResponse(INVALID_REQUEST, INVALID_REQUEST_MESSAGE, details)
+        val error = ErrorResponse("Constraint violation", details)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }

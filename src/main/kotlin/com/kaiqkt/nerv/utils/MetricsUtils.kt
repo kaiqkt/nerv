@@ -1,5 +1,6 @@
 package com.kaiqkt.nerv.utils
 
+import com.github.kittinunf.fuel.core.ResponseResultOf
 import io.micrometer.core.instrument.MeterRegistry
 import io.micrometer.core.instrument.Timer
 import org.springframework.stereotype.Component
@@ -37,5 +38,19 @@ class MetricsUtils(
                 .register(meterRegistry)
                 .record(durationSec, TimeUnit.SECONDS)
         }
+    }
+
+    fun request(
+        name: String,
+        vararg tags: String,
+        block: () -> ResponseResultOf<ByteArray>
+    ): ResponseResultOf<ByteArray> {
+        val responseResult = timer(name, *tags) {
+            block()
+        }
+
+        counter(name, *tags, Constants.Metrics.STATUS, responseResult.second.statusCode.toString())
+
+        return responseResult
     }
 }

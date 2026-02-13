@@ -5,7 +5,11 @@ import java.util.UUID
 
 object Constants {
     object Parameters {
-        val requestId = MDC.get("request_id") ?: UUID.randomUUID().toString()
+        const val REQUEST_ID = "requestId"
+    }
+
+    object Metrics {
+        const val STATUS = "status"
     }
 
     object Keys

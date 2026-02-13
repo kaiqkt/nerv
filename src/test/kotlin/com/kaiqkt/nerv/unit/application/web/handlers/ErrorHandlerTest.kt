@@ -31,7 +31,6 @@ class ErrorHandlerTest {
         val response = errorHandler.handleDomainException(domainException)
 
         assertEquals(HttpStatus.NOT_IMPLEMENTED, response.statusCode)
-        assertEquals(ErrorType.DEFAULT.name, response.body?.type)
         assertEquals("DEFAULT", response.body?.message)
     }
 
@@ -44,7 +43,6 @@ class ErrorHandlerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
         assertEquals("invalid", response.body?.details?.get("field"))
         assertEquals("Invalid request", response.body?.message)
-        assertEquals("INVALID_REQUEST", response.body?.type)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -67,8 +65,7 @@ class ErrorHandlerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
         assertEquals("defaultMessage", response.body?.details?.get("field"))
-        assertEquals("Invalid request", response.body?.message)
-        assertEquals("INVALID_REQUEST", response.body?.type)
+        assertEquals("Invalid method arguments", response.body?.message)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -91,8 +88,7 @@ class ErrorHandlerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
         assertEquals("invalid", response.body?.details?.get("field"))
-        assertEquals("Invalid request", response.body?.message)
-        assertEquals("INVALID_REQUEST", response.body?.type)
+        assertEquals("Invalid method arguments", response.body?.message)
     }
 
     @Test
@@ -110,8 +106,7 @@ class ErrorHandlerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
         assertEquals("message", response.body?.details?.get("object.field"))
-        assertEquals("Invalid request", response.body?.message)
-        assertEquals("INVALID_REQUEST", response.body?.type)
+        assertEquals("Constraint violation", response.body?.message)
     }
 
     @Test
@@ -124,7 +119,6 @@ class ErrorHandlerTest {
 
         assertEquals(HttpStatus.BAD_REQUEST, response.statusCode)
         assertEquals("required header", response.body?.details?.get("header_name"))
-        assertEquals("Invalid request", response.body?.message)
-        assertEquals("INVALID_REQUEST", response.body?.type)
+        assertEquals("Missing header", response.body?.message)
     }
 }
