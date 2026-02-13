@@ -1,4 +1,4 @@
-package ${package}.utils
+package com.kaiqkt.nerv.utils
 
 import org.slf4j.MDC
 import java.util.UUID

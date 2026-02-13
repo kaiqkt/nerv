@@ -1,4 +1,4 @@
-package ${package}.domain.exceptions
+package com.kaiqkt.nerv.domain.exceptions
 
 class DomainException(
     val type: ErrorType,

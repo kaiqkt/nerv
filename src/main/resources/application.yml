@@ -4,13 +4,14 @@ server:
 
 spring:
   application:
-    name: ${artifactId}
+    name: nerv
 
 management:
   endpoints:
     web:
       exposure:
         include: health, prometheus
+      base-path: /
   metrics:
     tags:
-      application: ${artifactId}
+      application: nerv

@@ -1,4 +1,4 @@
-package ${package}.application.config
+package com.kaiqkt.nerv.application.config
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

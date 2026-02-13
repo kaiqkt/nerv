@@ -1,4 +1,4 @@
-package ${package}
+package com.kaiqkt.nerv
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
