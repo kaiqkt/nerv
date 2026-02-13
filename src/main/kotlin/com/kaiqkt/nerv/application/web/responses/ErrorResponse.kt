@@ -1,4 +1,4 @@
-package ${package}.application.web.responses
+package com.kaiqkt.nerv.application.web.responses
 
 data class ErrorResponse(
     val type: String,

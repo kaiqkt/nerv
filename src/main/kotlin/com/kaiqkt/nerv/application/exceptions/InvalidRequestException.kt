@@ -1,4 +1,4 @@
-package ${package}.application.exceptions
+package com.kaiqkt.nerv.application.exceptions
 
 class InvalidRequestException(
     val errors: Map<String, Any>,
