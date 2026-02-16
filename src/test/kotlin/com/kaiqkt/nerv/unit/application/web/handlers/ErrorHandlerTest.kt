@@ -25,16 +25,6 @@ class ErrorHandlerTest {
     private val errorHandler = ErrorHandler()
 
     @Test
-    fun `given an DomainException when is DEFAULT should return the message based on the error type`() {
-        val domainException = DomainException(ErrorType.DEFAULT)
-
-        val response = errorHandler.handleDomainException(domainException)
-
-        assertEquals(HttpStatus.NOT_IMPLEMENTED, response.statusCode)
-        assertEquals("DEFAULT", response.body?.message)
-    }
-
-    @Test
     fun `given an InvalidRequestException when handling should return all fields errors with his associated message`() {
         val invalidRequestException = InvalidRequestException(mapOf("field" to "invalid"))
 

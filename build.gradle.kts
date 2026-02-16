@@ -32,11 +32,20 @@ jacoco {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("net.logstash.logback:logstash-logback-encoder:9.0")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.azam.ulidj:ulidj:1.0.1")
+    implementation("org.postgresql:postgresql")
+    implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-postgresql")
+//    implementation("com.h2database:h2")
+    implementation("com.github.kittinunf.fuel:fuel:2.3.1")
+    implementation("com.github.slugify:slugify:3.0.7")
 
     testImplementation("org.mock-server:mockserver-netty:5.15.0") {
         exclude(group = "org.slf4j", module = "slf4j-jdk14")
@@ -44,8 +53,9 @@ dependencies {
     testImplementation("org.mock-server:mockserver-client-java:5.15.0") {
         exclude(group = "org.slf4j", module = "slf4j-jdk14")
     }
-    testImplementation("io.rest-assured:rest-assured:5.5.7")
+    testImplementation("io.rest-assured:rest-assured:5.5.6")
     testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
     testImplementation("io.mockk:mockk:1.14.6")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -70,7 +80,7 @@ val excludePackages: List<String> by extra {
         "com/kaiqkt/nerv/application/web/responses/*",
         "com/kaiqkt/nerv/domain/models/*",
         "com/kaiqkt/nerv/domain/dtos/*",
-        "com/kaiqkt/nerv/domain/utils/*",
+        "com/kaiqkt/nerv/utils/*",
     )
 }
 

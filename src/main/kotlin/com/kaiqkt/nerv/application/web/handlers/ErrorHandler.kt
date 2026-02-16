@@ -20,21 +20,21 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 class ErrorHandler : ResponseEntityExceptionHandler() {
     @ExceptionHandler(DomainException::class)
     fun handleDomainException(ex: DomainException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse(ex.message ?: "error", mapOf())
+        val error = ErrorResponse(ex.type.name, ex.message ?: "error", mapOf())
 
         return ResponseEntity(error, getStatusCode(ex.type))
     }
 
     @ExceptionHandler(MissingRequestHeaderException::class)
     fun handleMissingRequestHeaderException(ex: MissingRequestHeaderException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse("Missing header", mapOf(ex.headerName to "required header"))
+        val error = ErrorResponse("MISSING_HEADER", "Missing header", mapOf(ex.headerName to "required header"))
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
 
     @ExceptionHandler(InvalidRequestException::class)
     fun handleInvalidRequestException(ex: InvalidRequestException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse("Invalid request", ex.errors)
+        val error = ErrorResponse("INVALID_REQUEST", "Invalid request", ex.errors)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
@@ -47,7 +47,7 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
     ): ResponseEntity<Any> {
         val details = ex.bindingResult.fieldErrors.associate { it.field to (it.defaultMessage ?: "invalid") }
 
-        val error = ErrorResponse("Invalid method arguments", details)
+        val error = ErrorResponse("INVALID_REQUEST_ARGUMENTS", "Invalid method arguments", details)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
@@ -60,10 +60,15 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
                 path to v.message
             }
 
-        val error = ErrorResponse("Constraint violation", details)
+        val error = ErrorResponse("CONSTRAINT_VIOLATION", "Constraint violation", details)
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error)
     }
 
-    private fun getStatusCode(type: ErrorType): HttpStatus = HttpStatus.NOT_IMPLEMENTED
+    private fun getStatusCode(type: ErrorType): HttpStatus {
+        return when (type) {
+            ErrorType.VAULT_ALREADY_EXISTS -> HttpStatus.CONFLICT
+            ErrorType.PROJECT_ALREADY_EXISTS -> HttpStatus.CONFLICT
+        }
+    }
 }

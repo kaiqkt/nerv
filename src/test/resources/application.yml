@@ -2,3 +2,21 @@
 spring:
   application:
     name: nerv
+  datasource:
+    url: jdbc:tc:postgresql:15.3:///test_database
+  web:
+    locale: en_US
+    locale-resolver: fixed
+
+github:
+  api-url: http://localhost:8081/github
+  auth-scopes:
+    - repo
+    - write:packages
+
+openbao:
+  api-url: http://localhost:8081/openbao
+  api-key: root-token
+  secret-engine:
+    type: kv
+    mount-path: secrets

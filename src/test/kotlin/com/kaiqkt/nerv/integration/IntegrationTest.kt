@@ -1,6 +1,8 @@
 package com.kaiqkt.nerv.integration
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.kaiqkt.nerv.domain.repositories.ProjectRepository
+import com.kaiqkt.nerv.unit.resources.openbao.OpenbaoHelper
 import io.restassured.RestAssured
 import io.restassured.config.ObjectMapperConfig
 import io.restassured.mapper.ObjectMapperType
@@ -22,6 +24,9 @@ class IntegrationTest {
     @Autowired
     lateinit var mapper: ObjectMapper
 
+    @Autowired
+    lateinit var projectRepository: ProjectRepository
+
     @BeforeAll
     fun before() {
         RestAssured.config =
@@ -36,5 +41,7 @@ class IntegrationTest {
 
     @BeforeEach
     fun beforeEach() {
+        OpenbaoHelper.reset()
+        projectRepository.deleteAll()
     }
 }
