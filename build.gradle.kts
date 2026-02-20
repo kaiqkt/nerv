@@ -43,7 +43,7 @@ dependencies {
     implementation("org.postgresql:postgresql")
     implementation("org.flywaydb:flyway-core")
     implementation("org.flywaydb:flyway-database-postgresql")
-//    implementation("com.h2database:h2")
+    implementation("com.h2database:h2")
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.slugify:slugify:3.0.7")
 

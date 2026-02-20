@@ -10,6 +10,7 @@ object Constants {
 
     object Metrics {
         const val STATUS = "status"
+        const val ACTION = "action"
         const val CREATED = "created"
         const val ALREADY_EXISTS = "already_exists"
     }

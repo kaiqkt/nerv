@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+
+
+logging:
+  level:
+    root: DEBUG
+
+github:
+  oauth:
+    url: https://github.com
+    client-id: 010101010
+    client-secret: 010101010
+
+security:
+  token-secret: 1234567890123456
+
+lock-interval: 60

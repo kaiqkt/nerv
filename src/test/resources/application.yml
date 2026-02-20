@@ -9,7 +9,12 @@ spring:
     locale-resolver: fixed
 
 github:
-  api-url: http://localhost:8081/github
-  auth-scopes:
-    - repo
-    - write:packages
+  oauth:
+    url: https://github.com
+    client-id: 010101010
+    client-secret: 010101010
+
+security:
+  token-secret: 1234567890123456
+
+lock-interval: 60

@@ -12,6 +12,7 @@
                 <logLevel/>
                 <message/>
                 <loggerName/>
+                <stackTrace/>
                 <pattern>
                     <pattern>
                         {

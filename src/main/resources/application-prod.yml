@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: ${POSTGRESQL_URL}
+    username: ${POSTGRESQL_USERNAME}
+    password: ${POSTGRESQL_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+github:
+  oauth:
+    url: https://github.com
+    client-id: 010101010
+    client-secret: 010101010
+
+security:
+  token-secret: 2426abe2c6a3acaea4368d0aa31c516163ee6f8b9471e1d2021d0f0279c0b6ee
+
+lock-interval: 60
