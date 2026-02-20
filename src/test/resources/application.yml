@@ -13,10 +13,3 @@ github:
   auth-scopes:
     - repo
     - write:packages
-
-openbao:
-  api-url: http://localhost:8081/openbao
-  api-key: root-token
-  secret-engine:
-    type: kv
-    mount-path: secrets
