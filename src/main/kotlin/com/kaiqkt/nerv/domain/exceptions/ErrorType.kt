@@ -8,4 +8,6 @@ enum class ErrorType(
     NICKNAME_ALREADY_EXISTS("Nickname already exists"),
     USER_NOT_FOUND("User not found"),
     GIT_ACCESS_TOKEN_ALREADY_EXISTS("Git Access Token already exists"),
+    INVALID_TOKEN("Token sign or parsed are invalid"),
+    EXPIRED_TOKEN("Expired token"),
 }

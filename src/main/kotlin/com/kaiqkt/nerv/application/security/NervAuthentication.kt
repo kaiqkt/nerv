@@ -2,35 +2,43 @@ package com.kaiqkt.nerv.application.security
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 
 class NervAuthentication(
-    val userId: String?,
+    private val userId: String,
+    private val roles: List<String>,
+    private val token: String
 ) : Authentication {
-    override fun getAuthorities(): Collection<GrantedAuthority?>? {
-        TODO("Not yet implemented")
+
+    private var authenticated: Boolean = true
+
+    override fun getAuthorities(): Collection<GrantedAuthority> {
+        return roles.map { SimpleGrantedAuthority(it) }
     }
 
-    override fun getCredentials(): Any? {
-        TODO("Not yet implemented")
+    override fun getCredentials(): Any {
+        return token
     }
 
-    override fun getDetails(): Any? {
-        TODO("Not yet implemented")
+    override fun getDetails(): Any {
+        return mapOf(
+            "user_id" to userId,
+        )
     }
 
-    override fun getPrincipal(): Any? {
-        TODO("Not yet implemented")
+    override fun getPrincipal(): Any {
+        return userId
     }
 
     override fun isAuthenticated(): Boolean {
-        TODO("Not yet implemented")
+        return authenticated
     }
 
     override fun setAuthenticated(isAuthenticated: Boolean) {
-        TODO("Not yet implemented")
+        authenticated = isAuthenticated
     }
 
-    override fun getName(): String? {
-        TODO("Not yet implemented")
+    override fun getName(): String {
+        return userId
     }
 }

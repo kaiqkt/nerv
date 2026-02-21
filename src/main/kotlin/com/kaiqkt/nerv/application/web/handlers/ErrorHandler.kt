@@ -1,7 +1,6 @@
 package com.kaiqkt.nerv.application.web.handlers
 
 import com.kaiqkt.nerv.application.exceptions.InvalidRequestException
-import com.kaiqkt.nerv.application.exceptions.UnauthorizedException
 import com.kaiqkt.nerv.application.web.responses.ErrorResponse
 import com.kaiqkt.nerv.domain.exceptions.DomainException
 import com.kaiqkt.nerv.domain.exceptions.ErrorType
@@ -24,13 +23,6 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
         val error = ErrorResponse(ex.type.name, ex.message ?: "error", mapOf())
 
         return ResponseEntity(error, getStatusCode(ex.type))
-    }
-
-    @ExceptionHandler(UnauthorizedException::class)
-    fun handleUnauthorizedException(ex: UnauthorizedException): ResponseEntity<ErrorResponse> {
-        val error = ErrorResponse(ex.type, ex.message ?: "error", mapOf())
-
-        return ResponseEntity(error, HttpStatus.UNAUTHORIZED)
     }
 
     @ExceptionHandler(MissingRequestHeaderException::class)
@@ -79,5 +71,8 @@ class ErrorHandler : ResponseEntityExceptionHandler() {
             ErrorType.EMAIL_ALREADY_EXISTS -> HttpStatus.CONFLICT
             ErrorType.NICKNAME_ALREADY_EXISTS -> HttpStatus.CONFLICT
             ErrorType.USER_NOT_FOUND -> HttpStatus.NOT_FOUND
+            ErrorType.GIT_ACCESS_TOKEN_ALREADY_EXISTS -> HttpStatus.CONFLICT
+            ErrorType.INVALID_TOKEN -> HttpStatus.BAD_REQUEST
+            ErrorType.EXPIRED_TOKEN -> HttpStatus.UNAUTHORIZED
         }
 }

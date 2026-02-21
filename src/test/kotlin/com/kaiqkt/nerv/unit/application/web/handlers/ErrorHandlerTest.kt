@@ -23,7 +23,7 @@ class ErrorHandlerTest {
     private val errorHandler = ErrorHandler()
 
     @Test
-    fun `given an InvalidRequestException when handling should return all fields errors with his associated message`() {
+    fun `given an InvalidRequestException when handling then return all fields errors with associated message`() {
         val invalidRequestException = InvalidRequestException(mapOf("field" to "invalid"))
 
         val response = errorHandler.handleInvalidRequestException(invalidRequestException)
@@ -35,7 +35,7 @@ class ErrorHandlerTest {
 
     @Suppress("UNCHECKED_CAST")
     @Test
-    fun `given an MethodArgumentNotValid when handling should return all fields errors with his associated message`() {
+    fun `given a MethodArgumentNotValid when handling then return all fields errors with associated message`() {
         val methodArgumentNotValidException = mockk<MethodArgumentNotValidException>()
         val fieldError = mockk<FieldError>()
 
@@ -58,7 +58,7 @@ class ErrorHandlerTest {
 
     @Suppress("UNCHECKED_CAST")
     @Test
-    fun `given an MethodArgumentNotValid when field error message is null should return all fields errors with invalid message`() {
+    fun `given a MethodArgumentNotValid when field error message is null then return all fields errors with invalid message`() {
         val methodArgumentNotValidException = mockk<MethodArgumentNotValidException>()
         val fieldError = mockk<FieldError>()
 
@@ -80,7 +80,7 @@ class ErrorHandlerTest {
     }
 
     @Test
-    fun `given an ConstraintViolationException should return the constraint violations`() {
+    fun `given a ConstraintViolationException when handling then return the constraint violations`() {
         val path = PathImpl.createPathFromString("object.field")
 
         val violation = mockk<ConstraintViolation<Any>>()
@@ -98,7 +98,7 @@ class ErrorHandlerTest {
     }
 
     @Test
-    fun `given an MissingRequestHeaderException should return the missing headers`() {
+    fun `given a MissingRequestHeaderException when handling then return the missing headers`() {
         val ex = mockk<MissingRequestHeaderException>()
 
         every { ex.headerName } returns "header_name"

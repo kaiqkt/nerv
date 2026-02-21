@@ -47,6 +47,7 @@ dependencies {
     implementation("com.h2database:h2")
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("com.github.slugify:slugify:3.0.7")
+    implementation("com.nimbusds:nimbus-jose-jwt:10.5")
 
     testImplementation("org.mock-server:mockserver-netty:5.15.0") {
         exclude(group = "org.slf4j", module = "slf4j-jdk14")

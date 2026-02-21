@@ -11,11 +11,14 @@ spring:
 github:
   oauth:
     url: https://github.com
-    client-id: 010101010
+    client-id: 0101010101
     client-secret: 010101010
-    redirect_uri: http://127.0.0.1:8080/v1/git/access_token
+    redirect_uri: http://localhost:8080/v1/git/access_token
 
 security:
   token-secret: 1234567890123456
 
-lock-interval: 60
+authentication:
+  ttl: 3600
+  application-uri: http://localhost:8080
+  secret: k2p4/4gX5h0x/1B9Y9O2VJ6ZcfjWQmV5UQJ4cZP9YvE=

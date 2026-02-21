@@ -12,7 +12,11 @@ object Constants {
         const val ALREADY_EXISTS = "already_exists"
     }
 
-    object Keys
+    object Keys {
+        const val ROLES = "roles"
+        const val PERMISSIONS = "permissions"
+        const val SID = "sid"
+    }
 
     object Headers
 
