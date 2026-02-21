@@ -12,7 +12,12 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "users")
 @EntityListeners(AuditingEntityListener::class)
-class User {
+class User(
+    val name: String = "",
+    val nickname: String = "",
+    val email: String = "",
+    var password: String = "",
+) {
     @Id
     val id: String = ULID.random()
 

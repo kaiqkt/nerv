@@ -13,21 +13,23 @@ import kotlin.test.assertEquals
 class ProjectIntegrationTest : IntegrationTest() {
     @Test
     fun `given a request to create a project when the request is invalid should thrown an error`() {
-        val request = ProjectRequest.Create(
-            name = "",
-            description = "description".repeat(255)
-        )
+        val request =
+            ProjectRequest.Create(
+                name = "",
+                description = "description".repeat(255),
+            )
 
-        val response = given()
-            .contentType(ContentType.JSON)
-            .body(request)
-            .post("/v1/projects")
-            .then()
-            .statusCode(HttpStatus.SC_BAD_REQUEST)
-            .extract()
-            .`as`(ErrorResponse::class.java)
+        val response =
+            given()
+                .contentType(ContentType.JSON)
+                .body(request)
+                .post("/v1/projects")
+                .then()
+                .statusCode(HttpStatus.SC_BAD_REQUEST)
+                .extract()
+                .`as`(ErrorResponse::class.java)
 
-        assertEquals("must contain 1 to 25 characters", response.details["name"])
+        assertEquals("input should not be blank", response.details["name"])
         assertEquals("must not exceed 255 characters", response.details["description"])
     }
 
@@ -35,32 +37,35 @@ class ProjectIntegrationTest : IntegrationTest() {
     fun `given a request to create a project when already exist a project with same name should return an error`() {
         Project(
             name = "initial project",
-            description = "description"
+            description = "description",
         ).also(projectRepository::save)
 
-        val request = ProjectRequest.Create(
-            name = "Initial Project",
-            description = "description"
-        )
+        val request =
+            ProjectRequest.Create(
+                name = "Initial Project",
+                description = "description",
+            )
 
-        val response = given()
-            .contentType(ContentType.JSON)
-            .body(request)
-            .post("/v1/projects")
-            .then()
-            .statusCode(HttpStatus.SC_CONFLICT)
-            .extract()
-            .`as`(ErrorResponse::class.java)
+        val response =
+            given()
+                .contentType(ContentType.JSON)
+                .body(request)
+                .post("/v1/projects")
+                .then()
+                .statusCode(HttpStatus.SC_CONFLICT)
+                .extract()
+                .`as`(ErrorResponse::class.java)
 
         assertEquals("Project already exists", response.message)
     }
 
     @Test
     fun `given a request a create a project should create successfully`() {
-        val request = ProjectRequest.Create(
-            name = "Initial Project",
-            description = "description"
-        )
+        val request =
+            ProjectRequest.Create(
+                name = "Initial Project",
+                description = "description",
+            )
 
         given()
             .contentType(ContentType.JSON)
@@ -70,7 +75,5 @@ class ProjectIntegrationTest : IntegrationTest() {
             .statusCode(HttpStatus.SC_OK)
             .extract()
             .`as`(ProjectResponse::class.java)
-
     }
-
 }

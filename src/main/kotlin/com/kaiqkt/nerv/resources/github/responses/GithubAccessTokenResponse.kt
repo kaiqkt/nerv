@@ -1,7 +1,6 @@
 package com.kaiqkt.nerv.resources.github.responses
 
-data class TokenResponse(
+data class GithubAccessTokenResponse(
     val accessToken: String?,
     val error: String?,
-    val interval: Int?
 )

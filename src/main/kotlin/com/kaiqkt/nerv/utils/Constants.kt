@@ -1,8 +1,5 @@
 package com.kaiqkt.nerv.utils
 
-import org.slf4j.MDC
-import java.util.UUID
-
 object Constants {
     object Parameters {
         const val REQUEST_ID = "requestId"

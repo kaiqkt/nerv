@@ -3,8 +3,6 @@ package com.kaiqkt.nerv.unit.application.web.handlers
 import com.kaiqkt.nerv.application.exceptions.InvalidRequestException
 import com.kaiqkt.nerv.application.web.handlers.ErrorHandler
 import com.kaiqkt.nerv.application.web.responses.ErrorResponse
-import com.kaiqkt.nerv.domain.exceptions.DomainException
-import com.kaiqkt.nerv.domain.exceptions.ErrorType
 import io.mockk.every
 import io.mockk.mockk
 import jakarta.validation.ConstraintViolation

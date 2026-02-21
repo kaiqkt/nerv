@@ -9,9 +9,8 @@ import kotlin.io.encoding.Base64
 @Service
 class CryptoService(
     @Value($$"${security.token-secret}")
-    private val secret: String
+    private val secret: String,
 ) {
-
     private val key = SecretKeySpec(secret.toByteArray(), "AES")
 
     fun encrypt(value: String): String {

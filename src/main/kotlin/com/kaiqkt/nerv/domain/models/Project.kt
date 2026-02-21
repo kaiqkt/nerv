@@ -5,6 +5,8 @@ import io.azam.ulidj.ULID
 import jakarta.persistence.Entity
 import jakarta.persistence.EntityListeners
 import jakarta.persistence.Id
+import jakarta.persistence.JoinColumn
+import jakarta.persistence.OneToOne
 import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
@@ -16,6 +18,9 @@ import java.time.LocalDateTime
 class Project(
     val name: String = "",
     val description: String? = null,
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private val user: User = User(),
 ) {
     @Id
     val id: String = ULID.random()

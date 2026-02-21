@@ -6,7 +6,6 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
 class UnexpectedResourceExceptionTest {
-
     @Test
     fun `given an exception, it should correctly return the message and source location`() {
         val errorMessage = "Test error message"
@@ -21,9 +20,10 @@ class UnexpectedResourceExceptionTest {
     @Test
     fun `given an exception, when stacktrace is null should return a null source location`() {
         val errorMessage = "Test error message"
-        val exception = UnexpectedResourceException(errorMessage).apply {
-            this.stackTrace = arrayOf()
-        }
+        val exception =
+            UnexpectedResourceException(errorMessage).apply {
+                this.stackTrace = arrayOf()
+            }
 
         assertEquals(errorMessage, exception.message)
 

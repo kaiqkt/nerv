@@ -16,9 +16,9 @@ import java.time.LocalDateTime
 @EntityListeners(AuditingEntityListener::class)
 class GitAccessToken(
     val accessToken: String = "",
-//    @OneToOne
-//    @JoinColumn(name = "user_id")
-//    val user: User = User(),
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private val user: User = User(),
 ) {
     @Id
     val id: String = ULID.random()

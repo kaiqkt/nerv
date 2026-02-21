@@ -1,5 +1,6 @@
 package com.kaiqkt.nerv.application.web.controllers
 
+import com.kaiqkt.nerv.application.security.SecurityContext
 import com.kaiqkt.nerv.application.web.requests.ProjectRequest
 import com.kaiqkt.nerv.application.web.requests.toDomain
 import com.kaiqkt.nerv.application.web.responses.ProjectResponse
@@ -15,16 +16,15 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/projects")
 class ProjectController(
-    private val projectService: ProjectService
+    private val projectService: ProjectService,
 ) {
-
     @PostMapping
     fun create(
         @Valid @RequestBody request: ProjectRequest.Create,
     ): ResponseEntity<ProjectResponse> {
-        val project = projectService.create(request.toDomain())
+        val userId = SecurityContext.getUserId()
+        val project = projectService.create(request.toDomain(), userId)
 
         return ResponseEntity.ok(project.toResponse())
     }
-
 }

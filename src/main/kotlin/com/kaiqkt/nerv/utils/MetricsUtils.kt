@@ -42,11 +42,12 @@ class MetricsUtils(
 
     fun request(
         name: String,
-        block: () -> ResponseResultOf<ByteArray>
+        block: () -> ResponseResultOf<ByteArray>,
     ): ResponseResultOf<ByteArray> {
-        val responseResult = timer(name) {
-            block()
-        }
+        val responseResult =
+            timer(name) {
+                block()
+            }
 
         counter(name, Constants.Metrics.STATUS, responseResult.second.statusCode.toString())
 

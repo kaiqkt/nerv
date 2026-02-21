@@ -8,15 +8,14 @@ data class ProjectResponse(
     val name: String,
     val slug: String,
     val description: String?,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
 )
 
-fun Project.toResponse(): ProjectResponse {
-    return ProjectResponse(
+fun Project.toResponse(): ProjectResponse =
+    ProjectResponse(
         id = this.id,
         name = this.name,
         slug = this.slug,
         description = this.description,
-        createdAt = this.createdAt
+        createdAt = this.createdAt,
     )
-}
