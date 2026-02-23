@@ -1,10 +1,13 @@
 package com.kaiqkt.nerv.domain.services
 
+import com.kaiqkt.nerv.domain.dtos.GitDeviceCodeDto
 import com.kaiqkt.nerv.domain.exceptions.DomainException
 import com.kaiqkt.nerv.domain.exceptions.ErrorType
 import com.kaiqkt.nerv.domain.gateways.GitGateway
 import com.kaiqkt.nerv.domain.models.GitAccessToken
+import com.kaiqkt.nerv.domain.models.User
 import com.kaiqkt.nerv.domain.repositories.GitAccessTokenRepository
+import com.kaiqkt.nerv.domain.repositories.UserRepository
 import com.kaiqkt.nerv.domain.results.GitAccessTokenResult
 import org.springframework.stereotype.Service
 
@@ -15,7 +18,9 @@ class GitService(
     private val gitAccessTokenRepository: GitAccessTokenRepository,
     private val userService: UserService,
 ) {
-    fun authorize(): String = gitGateway.getAuthorizeUrl()
+
+
+    fun getDeviceCode(): GitDeviceCodeDto = gitGateway.getDeviceCode()
 
     fun getAccessToken(
         code: String,

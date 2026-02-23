@@ -6,6 +6,6 @@ sealed class GitAccessTokenResult {
     ) : GitAccessTokenResult()
 
     data class Failure(
-        val message: String,
+        val error: String,
     ) : GitAccessTokenResult()
 }
